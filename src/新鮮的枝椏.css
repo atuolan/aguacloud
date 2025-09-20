@@ -106,7 +106,7 @@ body {
 /* PC端左右面板高度的精确控制 */
 
 /* --- 🔝 顶栏样式 --- */
-/* 顶栏图标的基础样式 */
+/* 顶栏图标的基础样式和悬停效果 */
 #top-bar .drawer-icon {
   color: var(--pixel-text-light); /* 应用较浅的文字颜色 */
   font-family: 'monospace'; /* 使用等宽字体以保证自定义符号显示一致 */
@@ -114,7 +114,6 @@ body {
   line-height: 1; /* 确保符号垂直居中 */
 }
 
-/* 鼠标悬停在顶栏图标上时的样式 */
 #top-bar .drawer-icon:hover {
   color: var(--pixel-accent); /* 悬停时变为高亮色 */
   transform: scale(1.1) rotate(-5deg); /* 添加轻微的放大和旋转效果，增加趣味性 */
@@ -154,13 +153,6 @@ body {
   content: '❏';
 } /* 右側導航容器 */
 
-/* 圖標替換機制：隱藏原始圖標並定位新圖標 */
-#top-bar .drawer-icon {
-  text-indent: -9999px; /* 將原有FontAwesome圖標移至不可見區域 */
-  position: relative; /* 為偽元素定位提供基準 */
-  font-size: 20px; /* 調整為適合Unicode符號的大小 */
-  font-family: 'monospace'; /* 等寬字體保證符號對齊 */
-}
 
 /* #top-bar .drawer-icon::before: 自定義圖標的位置調整 */
 #top-bar .drawer-icon::before {
@@ -733,41 +725,35 @@ li.disabled .prompt-manager-inspect-action {
     box-shadow: none !important; /* 移除陰影簡化界面 */
   }
 
-  /* 移動端消息氣泡佈局調整：縮小間距並改為垂直中心對齊 */
+  /* 移動端消息氣泡佈局調整 */
   .mes {
-    margin-bottom: 15px !important; /* 減少消息間距至15px */
-    padding: 10px !important; /* 減少內邊距至10px */
-    display: flex; /* 使用Flexbox佈局 */
-    flex-direction: column; /* 垂直排列 */
-    align-items: center; /* 水平置中對齊 */
+    margin-bottom: 15px !important;
+    padding: 10px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* 移動端字體大小調整 */
-  body,
-  #chat,
-  .mes_text {
-    font-size: 14px; /* 保持基礎字體大小 */
-    padding: 5px; /* 減少內邊距 */
+  body, #chat, .mes_text {
+    font-size: 14px;
+    padding: 5px;
   }
 
-  /* 移動端角色名稱佈局調整 */
   .mes .ch_name {
-    font-size: 16px !important; /* 保持較大字體 */
-    text-align: center; /* 置中顯示 */
-    order: 2; /* Flexbox順序：放在頭像之後 */
+    font-size: 16px !important;
+    text-align: center;
+    order: 2;
   }
 
-  /* 移動端頭像佈局調整 */
   .mes .avatar {
-    order: 1; /* Flexbox順序：放在最上方 */
-    margin-bottom: 10px; /* 與下方元素的間距 */
-    width: 80px; /* 固定寬度 */
-    height: 90px; /* 固定高度 */
+    order: 1;
+    margin-bottom: 10px;
+    width: 80px;
+    height: 90px;
   }
 
-  /* 移動端消息內容區域佈局 */
   .mes .mes_block {
-    order: 3; /* Flexbox順序：放在最下方 */
+    order: 3;
   }
 }
 
@@ -1256,11 +1242,6 @@ input[type='number']:focus {
     z-index: 9998 !important;
   }
 
-  /* .mes: 每一條聊天消息的容器（包含頭像、名稱、內容） */
-  .mes {
-    margin-bottom: 5px !important; /* 消息間距5像素 */
-    padding: 10px !important; /* 內邊距10像素 */
-  }
 
   /* 防止任何全屏覆盖元素在AI生成时阻挡交互 */
   body.generating *[style*='position: fixed'],
@@ -1333,6 +1314,7 @@ code {
   padding: 2px 4px; /* 緊密內邊距 */
   font-size: 0.9em; /* 稍小的字體 */
   word-break: keep-all; /* 避免斷詞 */
+  word-wrap: break-word; /* 兼容旧浏览器，长单词/字符换行 */
   display: inline; /* 確保行內顯示 */
   vertical-align: baseline; /* 基線對齊 */
 }
