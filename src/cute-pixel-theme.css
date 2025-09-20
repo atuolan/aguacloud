@@ -106,7 +106,7 @@ body {
 /* PC端左右面板高度的精确控制 */
 
 /* --- 🔝 顶栏样式 --- */
-/* 顶栏图标的基础样式 */
+/* 顶栏图标的基础样式和悬停效果 */
 #top-bar .drawer-icon {
   color: var(--pixel-text-light); /* 应用较浅的文字颜色 */
   font-family: 'monospace'; /* 使用等宽字体以保证自定义符号显示一致 */
@@ -114,7 +114,6 @@ body {
   line-height: 1; /* 确保符号垂直居中 */
 }
 
-/* 鼠标悬停在顶栏图标上时的样式 */
 #top-bar .drawer-icon:hover {
   color: var(--pixel-accent); /* 悬停时变为高亮色 */
   transform: scale(1.1) rotate(-5deg); /* 添加轻微的放大和旋转效果，增加趣味性 */
@@ -154,12 +153,14 @@ body {
   content: '❏';
 } /* 右側導航容器 */
 
-/* 圖標替換機制：隱藏原始圖標並定位新圖標 */
+/* 圖標替換機制：整合到上面的定義中 */
 #top-bar .drawer-icon {
+  color: var(--pixel-text-light);
+  font-family: 'monospace';
+  font-size: 20px; /* 調整為適合Unicode符號的大小 */
+  line-height: 1;
   text-indent: -9999px; /* 將原有FontAwesome圖標移至不可見區域 */
   position: relative; /* 為偽元素定位提供基準 */
-  font-size: 20px; /* 調整為適合Unicode符號的大小 */
-  font-family: 'monospace'; /* 等寬字體保證符號對齊 */
 }
 
 /* #top-bar .drawer-icon::before: 自定義圖標的位置調整 */
@@ -461,65 +462,34 @@ div[is_user='true'] .avatar img {
 /* Prompt Manager 检查按钮和条目的字体颜色 */
 /* 参考雙色盒子.css的实现方式，精确匹配SillyTavern的类名结构 */
 
-/* 已开启的条目 - 使用天蓝色强调 */
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled)
-  .prompt-manager-toggle-action,
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled)
-  .prompt-manager-inspect-action {
-  color: #eb8787 !important; /* 桃紅色*/
-  font-weight: 600;
-}
-
-/* 未开启/禁用的条目 - 使用灰色 */
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt_disabled
-  .completion_prompt_manager_prompt_name
-  .prompt-manager-inspect-action,
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt_disabled
-  .prompt-manager-toggle-action,
-#completion_prompt_manager #completion_prompt_manager_list .completion_prompt_manager_prompt_disabled .fa-solid {
-  color: color-mix(in srgb, var(--pixel-text-light) 50%, transparent) !important; /* 半透明的巧克力色 */
-  opacity: 0.7;
-}
-
-/* 悬停效果 - 已开启条目 */
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled)
-  .prompt-manager-inspect-action:hover {
-  color: var #878ceb !important;
-  transform: scale(1.05);
-  text-shadow: 0 0 4px var(--pixel-accent-shadow);
-}
-
-/* 悬停效果 - 未开启条目 */
-#completion_prompt_manager
-  #completion_prompt_manager_list
-  .completion_prompt_manager_prompt_disabled
-  .prompt-manager-inspect-action:hover {
-  color: var(--pixel-text) !important; /* 变为正常文字色 */
-  opacity: 0.9;
-  cursor: pointer;
-}
-
-/* 备用选择器 - 处理其他可能的类名组合 */
+/* Prompt Manager 检查按钮和条目样式 */
+#completion_prompt_manager .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled) .prompt-manager-toggle-action,
+#completion_prompt_manager .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled) .prompt-manager-inspect-action,
 .completion_prompt_manager_prompt.enabled .prompt-manager-inspect-action,
 li.enabled .prompt-manager-inspect-action {
-  color: #87ceeb !important; /* 天蓝色 */
+  color: #eb8787 !important;
   font-weight: 600;
 }
 
+#completion_prompt_manager .completion_prompt_manager_prompt_disabled .prompt-manager-inspect-action,
+#completion_prompt_manager .completion_prompt_manager_prompt_disabled .prompt-manager-toggle-action,
+#completion_prompt_manager .completion_prompt_manager_prompt_disabled .fa-solid,
 .completion_prompt_manager_prompt.disabled .prompt-manager-inspect-action,
 li.disabled .prompt-manager-inspect-action {
   color: color-mix(in srgb, var(--pixel-text-light) 50%, transparent) !important;
   opacity: 0.7;
+}
+
+#completion_prompt_manager .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled) .prompt-manager-inspect-action:hover {
+  color: #878ceb !important;
+  transform: scale(1.05);
+  text-shadow: 0 0 4px var(--pixel-accent-shadow);
+}
+
+#completion_prompt_manager .completion_prompt_manager_prompt_disabled .prompt-manager-inspect-action:hover {
+  color: var(--pixel-text) !important;
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 /* ============================================
@@ -785,8 +755,7 @@ textarea,
   min-width: 0; /* 防止内容溢出 */
 }
 
-/* 移动端select字段背景色修正 */
-@media screen and (max-width: 1000px) {
+  /* 移动端select字段和Select2组件背景色修正 */
   select,
   select.J-paginationjs-size-select,
   #themes,
@@ -797,23 +766,15 @@ textarea,
   #persona_description_position,
   select[id*='preset'],
   select[id*='template'],
-  select[id*='theme'] {
+  select[id*='theme'],
+  .select2-selection,
+  .select2-selection--multiple,
+  .select2-selection--single,
+  .select2-dropdown {
     background-color: #ffffff !important; /* 移动端强制白色背景 */
     -webkit-appearance: none; /* 移除webkit默认样式 */
     appearance: none; /* 移除默认样式 */
   }
-
-  /* 移动端Select2组件背景色修正 */
-  .select2-selection,
-  .select2-selection--multiple,
-  .select2-selection--single {
-    background-color: #ffffff !important; /* 移动端强制白色背景 */
-  }
-
-  .select2-dropdown {
-    background-color: #ffffff !important; /* 移动端下拉菜单白色背景 */
-  }
-}
 
 /* ============================================
   * 🎨 快捷格式化按鈕容器樣式
@@ -1062,11 +1023,6 @@ textarea,
   line-height: 1; /* 確保圖標垂直居中 */
 }
 
-/* #send_but: 發送消息按鈕的特別調整 */
-#send_but {
-  font-size: 0.95rem !important; /* 與其他按鈕保持一致的字體大小 */
-  padding: 4px 6px !important; /* 左右4px、上下6px內邊距 */
-}
 
 /* #extensionsMenuButton: 擴展菜單按鈕縮小 */
 #extensionsMenuButton {
@@ -1351,6 +1307,7 @@ code {
   padding: 2px 4px; /* 緊密內邊距 */
   font-size: 0.9em; /* 稍小的字體 */
   word-break: keep-all; /* 避免斷詞 */
+  word-wrap: break-word; /* 兼容旧浏览器，长单词/字符换行 */
   display: inline; /* 確保行內顯示 */
   vertical-align: baseline; /* 基線對齊 */
 }
