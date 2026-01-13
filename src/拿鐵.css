@@ -12,13 +12,14 @@ body,
 /* 頂欄顏色 */
 #top-bar {
   background-color: #c1a791 !important;
-  border-radius: 0 0 15px 15px;
+  border-radius: 15px 15px 0 0;
   box-shadow: none !important;
+  margin-top: 2px !important;
 }
 
 #top-settings-holder {
   background-color: #decfbb !important;
-  border-radius: 0 0 15px 15px;
+  border-radius: 15px 15px 0 0;
   margin: 0 auto;
   padding: 10px 15px;
   box-sizing: border-box;
@@ -587,25 +588,15 @@ a:active {
 .mes .mesAvatarWrapper {
   order: 1 !important;
   align-self: center !important;
-  margin-bottom: 5px !important;
-  padding: 0 !important;
+  margin-bottom: 10px !important;
 }
 
-.mes .mesAvatarWrapper .avatar,
-.mes .avatar,
-.mes.last_mes .avatar,
-.mes[is_user="true"] .avatar,
-.mes[is_user="false"] .avatar {
-  width: 80px !important;
-  height: 80px !important;
-  min-width: 80px !important;
-  min-height: 80px !important;
-  max-width: 80px !important;
-  max-height: 80px !important;
+.mes .mesAvatarWrapper .avatar {
+  width: 100px !important;
+  height: 100px !important;
 }
 
-.mes .mesAvatarWrapper .avatar img,
-.mes .avatar img {
+.mes .mesAvatarWrapper .avatar img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -616,7 +607,6 @@ a:active {
 .mes .ch_name {
   order: 2 !important;
   text-align: center !important;
-  margin-bottom: 5px !important;
 }
 
 .mes .mes_block {
@@ -891,143 +881,22 @@ pre code {
   color: #e8dbc7 !important;
 }
 
-/* character_popup 角色彈窗樣式 */
-#character_popup,
-.character_popup {
-  background-color: #795548 !important;
-}
-
-#character_popup *,
-.character_popup * {
-  color: #e8dbc7 !important;
-}
-
-#character_popup input,
-#character_popup textarea,
-#character_popup .text_pole,
-.character_popup input,
-.character_popup textarea,
-.character_popup .text_pole {
-  background-color: #e8dbc7 !important;
-  color: #3d2314 !important;
-}
-
-#character_popup .menu_button,
-.character_popup .menu_button {
-  background-color: #e8dbc7 !important;
-  color: #3d2314 !important;
-}
-
-#character_popup .menu_button *,
-.character_popup .menu_button * {
-  color: #3d2314 !important;
-}
-
-/* select2 下拉選單完整樣式 */
-.select2-container--default .select2-selection--single {
-  background-color: #e8dbc7 !important;
-  border-color: #8d6e63 !important;
-}
-
-.select2-container--default
-  .select2-selection--single
-  .select2-selection__rendered {
-  color: #3d2314 !important;
-}
-
-.select2-container--default .select2-results__group {
-  background-color: #8d6e63 !important;
-  color: #e8dbc7 !important;
-  font-weight: bold !important;
-}
-
-.select2-container--default .select2-results__option {
-  background-color: #795548 !important;
-  color: #e8dbc7 !important;
-}
-
-.select2-container--default .select2-results__option--highlighted,
-.select2-container--default .select2-results__option:hover {
-  background-color: #a1887f !important;
-  color: #fff !important;
-}
-
-.select2-container--default .select2-results__option--selected {
-  background-color: #6d4c41 !important;
-  color: #e8dbc7 !important;
-}
-
-.select2-container--default .select2-search--dropdown .select2-search__field {
-  background-color: #e8dbc7 !important;
-  color: #3d2314 !important;
-  border-color: #8d6e63 !important;
-}
-
-/* code 行內代碼樣式 */
-code {
-  background-color: #5d4037 !important;
-  color: #ffcc80 !important;
-  border-radius: 4px !important;
-  font-family: "Consolas", "Monaco", monospace !important;
-}
-
-/* 語法高亮配色 */
-code .hljs-keyword,
-pre .hljs-keyword {
-  color: #ffab91 !important;
-}
-
-/* 統一所有訊息頭像大小 - 包含 reasoning 和 last_mes */
-.mes.last_mes .mesAvatarWrapper .avatar,
-.mes.last_mes .avatar,
-.mes[is_system="true"] .avatar,
-.mes .reasoning .avatar,
-.last_mes .avatar {
-  width: 80px !important;
-  height: 80px !important;
+/* 修正世界書條目名稱欄位被壓縮問題 */
+.world_entry input.text_pole {
   min-width: 80px !important;
-  min-height: 80px !important;
-  max-width: 80px !important;
-  max-height: 80px !important;
+  flex-shrink: 0 !important;
 }
 
-.mes.last_mes .mesAvatarWrapper,
-.last_mes .mesAvatarWrapper {
-  padding: 0 !important;
-  margin-bottom: 5px !important;
+.world_entry .flex-container {
+  flex-wrap: wrap !important;
 }
 
-/* 移動端頭像縮小 */
-@media (max-width: 768px) {
-  .mes .mesAvatarWrapper .avatar,
-  .mes .avatar,
-  .mes.last_mes .avatar,
-  .mes.last_mes .mesAvatarWrapper .avatar,
-  .mes[is_user="true"] .avatar,
-  .mes[is_user="false"] .avatar {
-    width: 70px !important;
-    height: 70px !important;
-    min-width: 70px !important;
-    min-height: 70px !important;
-    max-width: 70px !important;
-    max-height: 70px !important;
+/* 修正世界書條目列表在移動端無法滾動到底的問題 */
+@media (max-width: 1000px) {
+  .world_popup_entries_list.ui-sortable {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: calc(100vh - 200px) !important;
+    padding-bottom: 100px !important;
   }
-}
-
-/* checkbox 勾勾樣式 */
-input[type="checkbox"] {
-  accent-color: #3d2314 !important;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #3d2314 !important;
-}
-
-#del_chat_checkbox,
-.popup input[type="checkbox"],
-.dialogue_popup input[type="checkbox"] {
-  width: 20px !important;
-  height: 20px !important;
-  accent-color: #3d2314 !important;
-  cursor: pointer !important;
 }
