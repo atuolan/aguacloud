@@ -107,7 +107,7 @@ body {
 /* PC端左右面板高度的精确控制 */
 
 /* --- 🔝 顶栏样式 --- */
-/* 顶栏图标的基础样式和悬停效果 */
+/* 顶栏图标的基础样式 */
 #top-bar .drawer-icon {
   color: var(--pixel-text-light); /* 应用较浅的文字颜色 */
   font-family: 'monospace'; /* 使用等宽字体以保证自定义符号显示一致 */
@@ -115,6 +115,7 @@ body {
   line-height: 1; /* 确保符号垂直居中 */
 }
 
+/* 鼠标悬停在顶栏图标上时的样式 */
 #top-bar .drawer-icon:hover {
   color: var(--pixel-accent); /* 悬停时变为高亮色 */
   transform: scale(1.1) rotate(-5deg); /* 添加轻微的放大和旋转效果，增加趣味性 */
@@ -144,6 +145,9 @@ body {
 #logo_block .drawer-icon::before {
   content: '❒';
 } /* Logo區塊 */
+#backgrounds-button .drawer-icon::before {
+  content: "❒";
+} /* Logo區塊 */
 #extensions-settings-button .drawer-icon::before {
   content: '❑';
 } /* 擴展設定按鈕 */
@@ -154,14 +158,12 @@ body {
   content: '❏';
 } /* 右側導航容器 */
 
-/* 圖標替換機制：整合到上面的定義中 */
+/* 圖標替換機制：隱藏原始圖標並定位新圖標 */
 #top-bar .drawer-icon {
-  color: var(--pixel-text-light);
-  font-family: 'monospace';
-  font-size: 20px; /* 調整為適合Unicode符號的大小 */
-  line-height: 1;
   text-indent: -9999px; /* 將原有FontAwesome圖標移至不可見區域 */
   position: relative; /* 為偽元素定位提供基準 */
+  font-size: 20px; /* 調整為適合Unicode符號的大小 */
+  font-family: 'monospace'; /* 等寬字體保證符號對齊 */
 }
 
 /* #top-bar .drawer-icon::before: 自定義圖標的位置調整 */
@@ -672,39 +674,41 @@ li.disabled .prompt-manager-inspect-action {
     box-shadow: none !important; /* 移除陰影簡化界面 */
   }
 
-  /* 移動端消息氣泡佈局調整 */
+  /* 移動端消息氣泡佈局調整：縮小間距並改為垂直中心對齊 */
   .mes {
-    margin-bottom: 15px !important;
-    padding: 10px !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 15px !important; /* 減少消息間距至15px */
+    padding: 10px !important; /* 減少內邊距至10px */
+    display: flex; /* 使用Flexbox佈局 */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 水平置中對齊 */
   }
 
   /* 移動端字體大小調整 */
-  body, #chat, .mes_text {
-    font-size: 14px;
-    padding: 5px;
+  body,
+  #chat,
+  .mes_text {
+    font-size: 14px; /* 保持基礎字體大小 */
+    padding: 5px; /* 減少內邊距 */
   }
 
   /* 移動端角色名稱佈局調整 */
   .mes .ch_name {
-    font-size: 16px !important;
-    text-align: center;
-    order: 2;
+    font-size: 16px !important; /* 保持較大字體 */
+    text-align: center; /* 置中顯示 */
+    order: 2; /* Flexbox順序：放在頭像之後 */
   }
 
   /* 移動端頭像佈局調整 */
   .mes .avatar {
-    order: 1;
-    margin-bottom: 10px;
-    width: 80px;
-    height: 90px;
+    order: 1; /* Flexbox順序：放在最上方 */
+    margin-bottom: 10px; /* 與下方元素的間距 */
+    width: 80px; /* 固定寬度 */
+    height: 90px; /* 固定高度 */
   }
 
   /* 移動端消息內容區域佈局 */
   .mes .mes_block {
-    order: 3;
+    order: 3; /* Flexbox順序：放在最下方 */
   }
 }
 
@@ -729,7 +733,8 @@ textarea,
   min-width: 0; /* 防止内容溢出 */
 }
 
-  /* 移动端select字段和Select2组件背景色修正 */
+/* 移动端select字段背景色修正 */
+@media screen and (max-width: 1000px) {
   select,
   select.J-paginationjs-size-select,
   #themes,
@@ -740,19 +745,25 @@ textarea,
   #persona_description_position,
   select[id*='preset'],
   select[id*='template'],
-  select[id*='theme'],
+  select[id*='theme'] {
+    background-color: var(--pixel-input-bg) !important; /* 移动端统一输入框背景色 */
+    color: var(--pixel-text) !important; /* 月光白文字 */
+    -webkit-appearance: none; /* 移除webkit默认样式 */
+    appearance: none; /* 移除默认样式 */
+  }
+
+  /* 移动端Select2组件背景色修正 */
   .select2-selection,
   .select2-selection--multiple,
   .select2-selection--single {
-    background-color: var(--pixel-input-bg) !important;
-    color: var(--pixel-text) !important;
-    -webkit-appearance: none;
-    appearance: none;
+    background-color: var(--pixel-input-bg) !important; /* 移动端统一输入框背景色 */
+    color: var(--pixel-text) !important; /* 月光白文字 */
   }
 
   .select2-dropdown {
-    background-color: var(--pixel-panel-bg) !important;
+    background-color: var(--pixel-panel-bg) !important; /* 移动端深色下拉菜单背景 */
   }
+}
 
 /* ============================================
   * 🎨 快捷格式化按鈕容器樣式
@@ -1150,23 +1161,25 @@ textarea,
   pointer-events: auto !important; /* 允许自身被交互 */
 }
 
+/* 移动端特殊处理：确保AI生成时不阻挡交互 */
+@media screen and (max-width: 1000px) {
   /* Completion Prompt Manager 移动端适配 */
   #completion_prompt_manager_popup {
-    width: 100% !important;
+    width: 100% !important; /* 移动端全屏宽度 */
     height: calc(100dvh - var(--topBarBlockSize, 50px) - var(--bottomFormBlockSize, 80px)) !important;
-    top: calc(var(--topBarBlockSize, 50px)) !important;
+    top: calc(var(--topBarBlockSize, 50px)) !important; /* 紧贴顶栏*/
     left: 0 !important;
     right: 0 !important;
     margin: 0 !important;
-    border-radius: 0 !important;
-    z-index: 10000 !important;
+    border-radius: 0 !important; /* 移动端移除圆角 */
+    z-index: 10000 !important; /* 确保在正确层级 */
   }
 
   #completion_prompt_manager_popup.drawer-content {
     width: 100% !important;
     height: 100% !important;
     border-radius: 0 !important;
-    box-shadow: none !important;
+    box-shadow: none !important; /* 移动端简化阴影 */
   }
 
   /* 确保面板在移动端始终可点击 */
@@ -1179,18 +1192,19 @@ textarea,
   #Backgrounds,
   #rm_extensions_block,
   #completion_prompt_manager_popup {
+    /* 添加 Prompt Manager 到可点击列表 */
     pointer-events: auto !important;
     z-index: 9999 !important;
   }
 
   /* 确保顶栏按钮在移动端可点击 */
+  /* 确保顶栏按钮在移动端可点击 */
   #top-bar,
   #top-bar .drawer-icon,
   #top-settings-holder {
     pointer-events: auto !important;
-    z-index: 10001 !important;
+    z-index: 10001 !important; /* 略高于面板 */
   }
-  
   #top-settings-holder {
     top: 0 !important;
   }
@@ -1209,6 +1223,11 @@ textarea,
     z-index: 9998 !important;
   }
 
+  /* .mes: 每一條聊天消息的容器（包含頭像、名稱、內容） */
+.mes {
+  margin-bottom: 5px !important; /* 消息間距5像素 */
+  padding: 10px !important; /* 內邊距10像素 */
+}
 
   /* 防止任何全屏覆盖元素在AI生成时阻挡交互 */
   body.generating *[style*='position: fixed'],
@@ -1229,6 +1248,7 @@ textarea,
     /* 确保 Prompt Manager 在生成时也可点击 */
     pointer-events: auto !important;
   }
+}
 
 /* 修复 Android 端用户统计按钮点击问题 */
 .user_stats_button {
@@ -1282,7 +1302,6 @@ code {
   padding: 2px 4px; /* 緊密內邊距 */
   font-size: 0.9em; /* 稍小的字體 */
   word-break: keep-all; /* 避免斷詞 */
-  word-wrap: break-word; /* 兼容旧浏览器，长单词/字符换行 */
   display: inline; /* 確保行內顯示 */
   vertical-align: baseline; /* 基線對齊 */
 }
