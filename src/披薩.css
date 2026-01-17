@@ -1,0 +1,1751 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   🍕 瑪格麗特披薩主題 (Margherita Pizza Theme)
+   靈感來源：經典義大利瑪格麗特披薩的溫暖配色
+   - 餅皮米黃、番茄紅、莫札瑞拉白、羅勒綠
+   特點：完全靜態、無動畫、無懸停效果
+   作者：阿瓜雲在哪都好反正二改可以標個阿瓜雲
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. 配色變數定義
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* 主要配色 - 瑪格麗特披薩色系 */
+  --pizza-crust: #ffeadd;           /* 烤餅皮 - 背景基底 */
+  --pizza-crust-dark: #EADBC8;      /* 深餅皮 - 用戶氣泡 */
+  --pizza-mozzarella: #FFFEF6;      /* 莫札瑞拉起司 - 面板/AI氣泡 */
+  --pizza-tomato: #D65A49;          /* 番茄醬 - 強調色/按鈕 */
+  --pizza-tomato-dark: #C04A3A;     /* 深番茄 - 按鈕按下 */
+  --pizza-basil: #5D9C59;           /* 羅勒葉 - 成功/選中狀態 */
+  --pizza-basil-light: #7DB87A;     /* 淺羅勒 - 聚焦邊框 */
+  --pizza-burnt: #4A3B32;           /* 焦脆邊緣 - 主要文字 */
+  --pizza-wheat: #E6D5B8;           /* 小麥色 - 邊框/分隔線 */
+  --pizza-olive: #8B7355;           /* 橄欖油色 - 次要文字 */
+  --pizza-flour: #FDF8F0;           /* 麵粉白 - 輸入框背景 */
+  
+  /* 漸層標題背景 */
+  --header-gradient: linear-gradient(to right, #D65A49, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. 全局靜止化處理 - 移除所有動畫和過渡效果
+   ═══════════════════════════════════════════════════════════════════════════ */
+* {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. 主體背景與基礎佈局
+   ═══════════════════════════════════════════════════════════════════════════ */
+body,
+#sheld {
+  background-color: var(--pizza-crust) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. 頂欄樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+#top-bar {
+  background-color: var(--pizza-crust) !important;
+  border-radius: 15px 15px 0 0;
+  box-shadow: none !important;
+  margin-top: 2px !important;
+}
+
+#top-settings-holder {
+  background-color: var(--pizza-mozzarella) !important;
+  border-radius: 15px 15px 0 0;
+  margin: 0 auto;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--pizza-wheat) !important;
+}
+
+/* 頂欄按鈕圖標顏色 */
+#top-settings-holder .drawer-icon {
+  color: var(--pizza-burnt);
+  position: relative;
+  top: 3px; /* 下移 2px */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. 聊天區域
+   ═══════════════════════════════════════════════════════════════════════════ */
+#chat {
+  background: linear-gradient(to bottom, #F8F1E5, #fbd4b8) !important;
+  background-attachment: local !important;
+}
+
+/* 聊天消息 - 泡泡風格 */
+.mes {
+  background: linear-gradient(
+    to bottom,
+    transparent 30px,
+    var(--pizza-mozzarella) 80px,
+    var(--pizza-mozzarella) 100%
+  ) !important;
+  max-width: 80%;
+  margin: 10px auto;
+  border-radius: 20px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px rgba(74, 59, 50, 0.1);
+  border: 1px solid var(--pizza-wheat) !important;
+  position: relative !important;
+}
+
+/* 訊息左上角羅勒葉裝飾 */
+.mes::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235D9C59' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* 用戶消息特殊樣式 - 與 AI 訊息相同背景 */
+.mes[is_user="true"] {
+  background: linear-gradient(
+    to bottom,
+    transparent 30px,
+    var(--pizza-mozzarella) 80px,
+    var(--pizza-mozzarella) 100%
+  ) !important;
+}
+
+/* last_mes 與普通 mes 佈局相同 */
+.mes.last_mes {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.mes.last_mes .mesAvatarWrapper {
+  order: 1 !important;
+  display: grid !important;
+  grid-template-columns: auto 40px auto !important; /* 三列：頭像 | 分隔線空間(加寬) | 標籤 */
+  grid-template-rows: auto auto auto !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px 0 !important;
+  margin-bottom: 8px !important;
+  width: auto !important;
+  position: relative !important;
+  padding-bottom: 0 !important; /* 修復 last_mes 間距過大問題 */
+}
+
+.mes.last_mes .ch_name {
+  order: 2 !important;
+}
+
+.mes.last_mes .mes_block {
+  order: 3 !important;
+}
+
+.mes.last_mes .swipeRightBlock {
+  order: 4 !important;
+}
+
+/* 選中的訊息 - 明顯的高亮效果 */
+.mes.selected {
+  background: linear-gradient(
+    135deg,
+    rgba(217, 99, 83, 0.15) 0%,    /* 番茄紅淡色 */
+    rgba(93, 156, 89, 0.12) 50%,   /* 羅勒綠淡色 */
+    rgba(217, 99, 83, 0.15) 100%
+  ) !important;
+  border: 2px solid #d96353 !important; /* 番茄紅邊框 */
+  box-shadow: 
+    0 0 15px rgba(217, 99, 83, 0.3),
+    inset 0 0 20px rgba(217, 99, 83, 0.05) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. 底欄與輸入區域
+   ═══════════════════════════════════════════════════════════════════════════ */
+#form_sheld {
+  background-color: var(--pizza-mozzarella) !important;
+  border-radius: 15px 15px 0 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-top: 2px solid var(--pizza-wheat) !important;
+}
+
+#send_form {
+  background-color: var(--pizza-mozzarella) !important;
+}
+
+#send_form.compact {
+  background-color: var(--pizza-mozzarella) !important;
+}
+
+/* compact 模式內所有圖標和按鈕顏色 */
+#send_form.compact i,
+#send_form.compact .fa-solid,
+#send_form.compact #options_button,
+#send_form.compact #extensionsMenuButton,
+#send_form.compact #send_but,
+#send_form.compact #mes_continue,
+#send_form.compact #mes_impersonate,
+#send_form.compact #mes_stop,
+#send_form.compact .stscript_btn,
+#send_form.compact .menu_button {
+  color: var(--pizza-burnt);
+}
+
+/* compact 模式輸入框樣式 */
+#send_form.compact #send_textarea {
+  background-color: var(--pizza-flour);
+  color: var(--pizza-burnt);
+  border: 2px solid var(--pizza-wheat);
+  border-radius: 12px;
+}
+
+#send_form.compact #send_textarea:focus {
+  border-color: var(--pizza-basil) !important;
+}
+
+#send_form.compact #send_textarea::placeholder {
+  color: var(--pizza-olive);
+  opacity: 0.8;
+}
+
+/* nonQRFormItems 區域顏色 */
+#nonQRFormItems {
+  background-color: var(--pizza-mozzarella);
+}
+
+#nonQRFormItems i,
+#nonQRFormItems .fa-solid,
+#nonQRFormItems #options_button,
+#nonQRFormItems #extensionsMenuButton,
+#nonQRFormItems #send_but,
+#nonQRFormItems #mes_continue,
+#nonQRFormItems #mes_impersonate,
+#nonQRFormItems #mes_stop,
+#nonQRFormItems .stscript_btn {
+  color: var(--pizza-burnt);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. 側邊欄與抽屜面板
+   ═══════════════════════════════════════════════════════════════════════════ */
+.drawer-content {
+  background-color: var(--pizza-mozzarella) !important;
+}
+
+.drawer,
+.drawer-toggle,
+.drawer-header,
+#ai-config-button,
+#sys-settings-button,
+#advanced-formatting-button,
+#WI-SP-button,
+#user-settings-button,
+#logo_block,
+#extensions-settings-button,
+#persona-management-button,
+#rightNavHolder {
+  background-color: transparent !important;
+}
+
+.drawer-content.fillLeft,
+.drawer-content.fillRight,
+#left-nav-panel,
+#right-nav-panel,
+#rm_api_block,
+#AdvancedFormatting,
+#WorldInfo,
+#user-settings-block,
+#Backgrounds,
+#rm_extensions_block {
+  background-color: var(--pizza-mozzarella) !important;
+  border: 1px solid var(--pizza-wheat) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. 按鈕樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+.menu_button {
+  background-color: var(--pizza-tomato) !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+.menu_button i,
+.menu_button .fa-solid {
+  color: #FFFFFF !important;
+}
+
+/* 取消懸停效果 - 完全靜態 */
+.menu_button:hover,
+.menu_button:focus,
+.menu_button:active {
+  background-color: var(--pizza-tomato) !important;
+  color: #FFFFFF !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.menu_button:hover i,
+.menu_button:hover .fa-solid {
+  color: #FFFFFF !important;
+}
+
+/* 所有 interactable 取消懸停動畫 */
+.menu_button.interactable:hover,
+.menu_button.interactable:focus,
+.menu_button.interactable:active,
+.move_entry_button:hover,
+.move_entry_button:focus,
+.move_entry_button:active,
+.interactable:hover,
+.interactable:focus,
+.interactable:active {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. 輸入框與下拉選單
+   ═══════════════════════════════════════════════════════════════════════════ */
+select,
+.text_pole {
+  background-color: var(--pizza-flour) !important;
+  color: var(--pizza-burnt) !important;
+  border: 1px solid var(--pizza-wheat) !important;
+  border-radius: 8px !important;
+}
+
+.text_pole:focus,
+select:focus {
+  border-color: var(--pizza-basil) !important;
+  outline: none !important;
+}
+
+/* 下拉選單選項樣式 */
+select option {
+  background-color: var(--pizza-mozzarella) !important;
+  color: var(--pizza-burnt) !important;
+  padding: 8px 12px !important;
+}
+
+select option:hover,
+select option:checked {
+  background-color: var(--pizza-crust) !important;
+  color: var(--pizza-burnt) !important;
+}
+
+input,
+textarea {
+  color: var(--pizza-burnt) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--pizza-olive) !important;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. 移除陰影（聊天泡泡除外）
+   ═══════════════════════════════════════════════════════════════════════════ */
+*:not(.mes):not(#top-settings-holder) {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   11. 標題與下拉式標題樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+h4 {
+  background: transparent !important; /* 移除背景色 */
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  color: var(--pizza-burnt) !important;
+}
+
+/* h4 內的 span 文字：左邊豎線 + 右邊葉子（不影響其他按鈕位置） */
+h4 > span:first-of-type,
+h4:not(:has(span)) {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+h4 > span:first-of-type::before,
+h4:not(:has(span))::before {
+  content: "|" !important;
+  color: #d96353 !important;
+  font-weight: bold !important;
+  font-size: 1.2em !important;
+}
+
+h4 > span:first-of-type::after,
+h4:not(:has(span))::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235D9C59' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.standoutHeader,
+.inline-drawer-toggle,
+.inline-drawer-header {
+  background: transparent !important; /* 移除背景色 */
+  color: var(--pizza-burnt) !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+  border: none !important; /* 移除邊框 */
+}
+
+.standoutHeader *,
+.inline-drawer-toggle *,
+.inline-drawer-header * {
+  color: var(--pizza-burnt) !important;
+}
+
+/* 標題文字樣式：左邊豎線 + 右邊葉子圖標 */
+.standoutHeader strong,
+.standoutHeader b,
+.inline-drawer-toggle b,
+.inline-drawer-header b,
+.inline-drawer-toggle > .flex-container > b,
+.inline-drawer-header > .flex-container > b {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* 左邊的番茄紅豎線 */
+.standoutHeader strong::before,
+.standoutHeader b::before,
+.inline-drawer-toggle b::before,
+.inline-drawer-header b::before {
+  content: "|" !important;
+  color: #d96353 !important;
+  font-weight: bold !important;
+  font-size: 1.2em !important;
+}
+
+/* 右邊的綠色葉子圖標 */
+.standoutHeader strong::after,
+.standoutHeader b::after,
+.inline-drawer-toggle b::after,
+.inline-drawer-header b::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235D9C59' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+/* 取消下拉式標題懸停效果 */
+.standoutHeader:hover,
+.inline-drawer-toggle:hover,
+.inline-drawer-header:hover {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* inline-drawer-header gap5px padding0 保持透明背景 */
+.inline-drawer-header.gap5px.padding0 {
+  background: transparent !important;
+}
+
+.inline-drawer-header.gap5px.padding0 * {
+  color: var(--pizza-burnt) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   12. 彈窗樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+#shadow_select_chat_popup {
+  background-color: rgba(74, 59, 50, 0.5) !important;
+}
+
+#select_chat_popup,
+.popup,
+.popup-content,
+#dialogue_popup,
+#dialogue_popup_text,
+.dialogue_popup_holder {
+  background-color: var(--pizza-crust-dark) !important;
+  border: 2px solid var(--pizza-wheat) !important;
+  border-radius: 15px !important;
+}
+
+#select_chat_popup .menu_button,
+.popup .menu_button,
+#dialogue_popup .menu_button {
+  background-color: var(--pizza-tomato) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+#select_chat_popup .menu_button i,
+#select_chat_popup .menu_button .fa-solid,
+#select_chat_popup .menu_button span,
+.popup .menu_button i,
+.popup .menu_button .fa-solid,
+.popup .menu_button span {
+  color: #FFFFFF !important;
+}
+
+/* 彈窗內文字顏色 */
+#select_chat_popup h3,
+#select_chat_popup h4,
+#select_chat_popup label,
+#select_chat_popup span:not(.select_chat_block_wrapper span),
+.popup h3,
+.popup h4,
+.popup label,
+#dialogue_popup h3,
+#dialogue_popup h4 {
+  color: var(--pizza-burnt) !important;
+}
+
+/* 彈窗內輸入框 */
+#select_chat_popup input,
+#select_chat_popup .text_pole,
+.popup input,
+.popup .text_pole {
+  background-color: var(--pizza-flour) !important;
+  color: var(--pizza-burnt) !important;
+}
+
+/* 聊天記錄項目 */
+.select_chat_block_wrapper,
+.select_chat_block_wrapper.flex-container {
+  background-color: transparent !important;
+}
+
+.select_chat_block,
+.select_chat_block.wide100p.flex-container {
+  background-color: var(--pizza-mozzarella) !important;
+  color: var(--pizza-burnt) !important;
+  border: 1px solid var(--pizza-wheat) !important;
+  border-radius: 10px !important;
+}
+
+.select_chat_block_wrapper *,
+.select_chat_block * {
+  color: var(--pizza-burnt) !important;
+}
+
+/* 彈窗按鈕文字強制顯示 */
+#select_chat_popup .menu_button *,
+.popup .menu_button * {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 聊天記錄彈窗按鈕文字 */
+#newChatFromManageScreenButton,
+#newChatFromManageScreenButton span,
+#newChatFromManageScreenButton i,
+#chat_import_button,
+#chat_import_button span,
+#chat_import_button i {
+  color: #FFFFFF !important;
+}
+
+/* 強制顯示按鈕文字 */
+#select_chat_popup .menu_button.menu_button_icon span,
+#select_chat_popup #newChatFromManageScreenButton span,
+#select_chat_popup #chat_import_button span,
+.menu_button.menu_button_icon.interactable span {
+  display: inline !important;
+  font-size: 14px !important;
+  margin-left: 5px !important;
+  color: #FFFFFF !important;
+  background-color: transparent !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  text-indent: 0 !important;
+  position: static !important;
+  clip: auto !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   13. select2 下拉選單
+   ═══════════════════════════════════════════════════════════════════════════ */
+.select2-selection__rendered {
+  background: var(--header-gradient) !important;
+  color: #FFFFFF !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+}
+
+.select2-dropdown,
+.select2-dropdown--below {
+  background-color: var(--pizza-mozzarella) !important;
+  color: var(--pizza-burnt) !important;
+  border: 2px solid var(--pizza-wheat) !important;
+  border-radius: 8px !important;
+}
+
+.select2-results__option {
+  background-color: var(--pizza-mozzarella) !important;
+  color: var(--pizza-burnt) !important;
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+}
+
+.select2-results__option--highlighted,
+.select2-results__option:hover,
+.select2-results__option--selected {
+  background-color: var(--pizza-tomato) !important;
+  color: #FFFFFF !important;
+}
+
+/* 確保所有下拉選單文字清晰可見 */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--pizza-burnt) !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+  background-color: var(--pizza-flour) !important;
+  color: var(--pizza-burnt) !important;
+  border: 1px solid var(--pizza-wheat) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   14. bg-header-fixed 統一顏色
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bg-header-fixed {
+  background: var(--header-gradient) !important;
+  color: #FFFFFF !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+}
+
+.bg-header-fixed * {
+  color: #FFFFFF !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   15. 大型彈窗輸入框樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+.wide_dialogue_popup input,
+.wide_dialogue_popup textarea,
+.wide_dialogue_popup .text_pole,
+.large_dialogue_popup input,
+.large_dialogue_popup textarea,
+.large_dialogue_popup .text_pole,
+.popup--animation-fast input,
+.popup--animation-fast textarea,
+.popup--animation-fast .text_pole {
+  background-color: var(--pizza-flour) !important;
+  color: var(--pizza-burnt) !important;
+}
+
+.wide_dialogue_popup input::placeholder,
+.wide_dialogue_popup textarea::placeholder,
+.large_dialogue_popup input::placeholder,
+.large_dialogue_popup textarea::placeholder,
+.popup--animation-fast input::placeholder,
+.popup--animation-fast textarea::placeholder {
+  color: var(--pizza-olive) !important;
+}
+
+/* textarea_compact 樣式 */
+.textarea_compact,
+.textarea_compact.flex1 {
+  background-color: var(--pizza-flour) !important;
+  color: var(--pizza-burnt) !important;
+}
+
+.textarea_compact::placeholder {
+  color: var(--pizza-olive) !important;
+}
+
+.samplerHelpButton,
+[name="samplerHelpButton"] {
+  color: var(--pizza-burnt) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   16. 超連結顏色
+   ═══════════════════════════════════════════════════════════════════════════ */
+a,
+a:link,
+a:visited {
+  color: var(--pizza-tomato) !important;
+}
+
+a:hover,
+a:active {
+  color: var(--pizza-tomato-dark) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   17. 訊息佈局 - 披薩可愛風格
+   ═══════════════════════════════════════════════════════════════════════════ */
+.mes {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* === 頭像區塊 - Grid 佈局：頭像左側，標籤右側垂直排列 === */
+.mes .mesAvatarWrapper {
+  order: 1 !important;
+  display: grid !important;
+  grid-template-columns: auto 40px auto !important; /* 三列：頭像 | 分隔線空間(加寬) | 標籤 */
+  grid-template-rows: auto auto auto !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px 0 !important;
+  margin-bottom: 8px !important;
+  width: auto !important;
+  position: relative !important;
+}
+
+/* 小食票分隔線 - 垂直虛線 */
+.mes .mesAvatarWrapper::after {
+  content: "";
+  grid-column: 2 !important;
+  grid-row: 1 / 4 !important;
+  width: 2px !important;
+  height: 90% !important;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--pizza-olive) 0px,
+    var(--pizza-olive) 6px,
+    transparent 6px,
+    transparent 12px
+  ) !important; /* 虛線效果 */
+  justify-self: center !important;
+  align-self: center !important;
+  opacity: 0.6 !important;
+}
+
+/* 頭像跨三行，在左側 */
+.mes .mesAvatarWrapper .avatar {
+  grid-column: 1 !important;
+  grid-row: 1 / 4 !important;
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+  border: 3px solid var(--pizza-tomato) !important;
+  box-shadow: 0 3px 8px rgba(214, 90, 73, 0.3) !important;
+}
+
+.mes .mesAvatarWrapper .avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+/* === 標籤在右側垂直排列 - 鏤空效果 === */
+.mes .mesAvatarWrapper .mesIDDisplay {
+  grid-column: 3 !important; /* 第三列（分隔線右側） */
+  grid-row: 1 !important;
+}
+
+.mes .mesAvatarWrapper .mes_timer {
+  grid-column: 3 !important; /* 第三列（分隔線右側） */
+  grid-row: 2 !important;
+}
+
+.mes .mesAvatarWrapper .tokenCounterDisplay {
+  grid-column: 3 !important; /* 第三列（分隔線右側） */
+  grid-row: 3 !important;
+}
+
+/* 標籤通用樣式 - 鏤空效果（長條狀） */
+.mes .mesAvatarWrapper .mesIDDisplay,
+.mes .mesAvatarWrapper .mes_timer,
+.mes .mesAvatarWrapper .tokenCounterDisplay {
+  display: block !important;
+  font-size: 9px !important;
+  padding: 4px 20px !important; /* 加長左右 padding */
+  min-width: 80px !important; /* 最小寬度確保長條感 */
+  border-radius: 15px !important; /* 圓角長條 */
+  white-space: nowrap !important;
+  background: transparent !important;
+  font-weight: 500 !important;
+  text-align: center !important; /* 文字置中 */
+}
+
+/* 第X片 - 番茄紅鏤空 */
+.mes .mesAvatarWrapper .mesIDDisplay {
+  color: var(--pizza-tomato) !important;
+  border: 1.5px solid var(--pizza-tomato) !important;
+}
+
+/* 烤了X秒 - 橄欖褐鏤空 */
+.mes .mesAvatarWrapper .mes_timer {
+  color: var(--pizza-olive) !important;
+  border: 1.5px solid var(--pizza-olive) !important;
+}
+
+/* X大卡 - 羅勒綠鏤空 */
+.mes .mesAvatarWrapper .tokenCounterDisplay {
+  color: var(--pizza-basil) !important;
+  border: 1.5px solid var(--pizza-basil) !important;
+}
+
+/* === 角色名稱區塊 - 緞帶風格 === */
+.mes .ch_name {
+  order: 2 !important;
+  text-align: center !important;
+  width: 100% !important;
+  padding: 8px 0 !important;
+  margin-bottom: 5px !important;
+  border-bottom: 2px dashed var(--pizza-wheat) !important;
+}
+
+/* 角色名稱文字 */
+.mes .ch_name .name_text {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--pizza-tomato) !important;
+}
+
+/* 時間戳 - 小巧顯示 */
+.mes .ch_name .timestamp {
+  font-size: 11px !important;
+  color: var(--pizza-olive) !important;
+  margin-left: 8px !important;
+  background: var(--pizza-crust-dark) !important;
+  padding: 2px 8px !important;
+  border-radius: 10px !important;
+}
+
+/* ch_name 內的 flex 容器置中 */
+.mes .ch_name .flex-container.flex1.alignitemscenter,
+.mes .ch_name .flex-container.justifySpaceBetween {
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+}
+
+/* 編輯按鈕淡化 */
+.mes .ch_name .mes_buttons {
+  opacity: 0.6 !important;
+}
+
+.mes .ch_name .mes_buttons i {
+  color: var(--pizza-olive) !important;
+  font-size: 12px !important;
+}
+
+/* 書籤、編輯、更多按鈕 - 深色 */
+.mes_button.mes_bookmark.fa-solid.fa-flag,
+.mes_button.mes_edit.fa-solid.fa-pencil,
+.mes_button.extraMesButtonsHint.fa-solid.fa-ellipsis {
+  color: #8b4513 !important; /* 深棕色 */
+  opacity: 0.85 !important;
+}
+
+/* === 訊息內容區塊 === */
+.mes .mes_block {
+  order: 3 !important;
+  width: 100% !important;
+}
+
+.mes .swipeRightBlock {
+  order: 4 !important;
+}
+
+.mes .swipeRightBlock {
+  order: 4 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   18. 訊息計數器自訂文字 - 披薩主題可愛標籤
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* mesIDDisplay 改成「🍕 第X片」 */
+.mesIDDisplay::before {
+  content: "🍕";
+}
+
+.mesIDDisplay::after {
+  content: "";
+}
+
+/* mes_timer 改成「⏱ X」 */
+.mes_timer::before {
+  content: "⏱ ";
+}
+
+/* tokenCounterDisplay 改成「🔥 X」 */
+.tokenCounterDisplay::before {
+  content: "🔥 ";
+}
+
+.tokenCounterDisplay::after {
+  content: "";
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   19. mes_reasoning_header 樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+.mes_reasoning_header,
+.mes_reasoning_header.flex-container {
+  background: var(--header-gradient) !important;
+  color: #FFFFFF !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.mes_reasoning_header *,
+.mes_reasoning_header.flex-container * {
+  color: #FFFFFF !important;
+}
+
+.mes_reasoning_header .fa-chevron-down,
+.mes_reasoning_header .fa-chevron-up,
+.mes_reasoning_header [class*="chevron"] {
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   20. 移動端適配
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1000px) {
+  .mes {
+    max-width: 95% !important;
+  }
+  
+  /* 修復 lm_button_panel_pin_div 與 scrollableInner 重疊問題 */
+  /* 讓 scrollableInner 下移，避免被頂部固定元素遮擋 */
+  .drawer-content.fillLeft .scrollableInner {
+    margin-top: 10px !important;
+  }
+  
+  /* 如果頂部有多個固定元素，增加更多間距 */
+  #lm_button_panel_pin_div + .toggle-description + #labModeWarning + a + .scrollableInner,
+  #lm_button_panel_pin_div ~ .scrollableInner {
+    padding-top: 15px !important;
+  }
+}
+
+/* alignContentCenter 內圖標間距 */
+.alignContentCenter {
+  gap: 10px !important;
+  flex-direction: row !important;
+}
+
+/* 移動端輸入區域保持水平排列 */
+#leftSendForm,
+#rightSendForm {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  min-width: auto !important;
+  max-width: fit-content !important;
+}
+
+#nonQRFormItems {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+#send_textarea {
+  flex: 1 1 auto !important;
+  min-width: 50px !important;
+  width: auto !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   21. options 選單顏色統一
+   ═══════════════════════════════════════════════════════════════════════════ */
+#options,
+.options-content {
+  background-color: var(--pizza-mozzarella) !important;
+  border: 1px solid var(--pizza-wheat) !important;
+  border-radius: 10px !important;
+}
+
+#options a,
+.options-content a {
+  color: var(--pizza-burnt) !important;
+}
+
+#options a i,
+.options-content a i,
+#options a .fa-solid,
+.options-content a .fa-solid {
+  color: var(--pizza-burnt) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   22. 強制顯示所有按鈕圖標
+   ═══════════════════════════════════════════════════════════════════════════ */
+.move_entry_button,
+.duplicate_entry_button,
+.delete_entry_button,
+i.menu_button {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+i.menu_button::before,
+.move_entry_button::before,
+.duplicate_entry_button::before,
+.delete_entry_button::before {
+  color: var(--pizza-burnt) !important;
+  opacity: 1 !important;
+}
+
+/* inline-drawer 下拉箭頭強制顯示 */
+.inline-drawer-toggle,
+.inline-drawer-icon,
+.fa-circle-chevron-down,
+.fa-circle-chevron-up {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--pizza-burnt) !important;
+}
+
+.inline-drawer-toggle:hover,
+.inline-drawer-icon:hover {
+  filter: none !important;
+  transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   23. 世界書條目文字顏色
+   ═══════════════════════════════════════════════════════════════════════════ */
+.world_entry,
+.world_entry *,
+.world_entry input,
+.world_entry select,
+.world_entry label,
+.world_entry span,
+.world_entry small {
+  color: var(--pizza-burnt) !important;
+}
+
+/* 通用文字顏色 */
+.drawer-content,
+.drawer-content *,
+#WorldInfo,
+#WorldInfo * {
+  color: var(--pizza-burnt) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   24. 角色名左邊加披薩圖標
+   ═══════════════════════════════════════════════════════════════════════════ */
+#rm_button_selected_ch {
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+}
+
+#rm_button_selected_ch::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  margin-right: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 11h.01'/%3E%3Cpath d='M11 15h.01'/%3E%3Cpath d='M16 16h.01'/%3E%3Cpath d='m2 16 20 6-6-20A20 20 0 0 0 2 16'/%3E%3Cpath d='M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   25. Lucide 圖標替換
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 頂欄圖標替換為披薩 SVG */
+#top-settings-holder .drawer-icon::before {
+  content: "" !important;
+}
+
+#top-settings-holder .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 11h.01'/%3E%3Cpath d='M11 15h.01'/%3E%3Cpath d='M16 16h.01'/%3E%3Cpath d='m2 16 20 6-6-20A20 20 0 0 0 2 16'/%3E%3Cpath d='M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+/* user-settings-button 圖標替換為廚師帽 SVG (chef-hat) */
+#user-settings-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z'/%3E%3Cpath d='M6 17h12'/%3E%3C/svg%3E") !important;
+}
+
+/* sys-settings-button 圖標替換為餐具 SVG (utensils) */
+#sys-settings-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2'/%3E%3Cpath d='M7 2v20'/%3E%3Cpath d='M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7'/%3E%3C/svg%3E") !important;
+}
+
+/* advanced-formatting-button 圖標替換為羅勒葉 SVG (leaf) */
+#advanced-formatting-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") !important;
+}
+
+/* persona-management-button 圖標替換為番茄 SVG (apple - 代替番茄) */
+#persona-management-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z'/%3E%3Cpath d='M10 2c1 .5 2 2 2 5'/%3E%3C/svg%3E") !important;
+}
+
+/* extensions-settings-button 圖標替換為起司 SVG (sandwich) */
+#extensions-settings-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 11 18-5v12L3 14v-3z'/%3E%3Cpath d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/%3E%3Cpath d='M3 11l6-2'/%3E%3Cpath d='M9 9v4'/%3E%3Cpath d='M21 18V6'/%3E%3C/svg%3E") !important;
+}
+
+/* WI-SP-button 圖標替換為書本 SVG (book-open) */
+#WI-SP-button .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 7v14'/%3E%3Cpath d='M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z'/%3E%3C/svg%3E") !important;
+}
+
+/* logo_block (backgrounds-button) 圖標替換為圖片 SVG (image) */
+#backgrounds-drawer-toggle .drawer-icon,
+#top-settings-holder #logo_block .drawer-icon,
+#top-settings-holder #site_logo .drawer-icon,
+#logo_block .drawer-icon,
+#site_logo .drawer-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='3' rx='2' ry='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+}
+
+/* send_but 圖標替換為發送 SVG (send) - 披薩切片圖標 */
+#send_but::before {
+  content: "" !important;
+}
+
+#send_but:not(.displayNone) {
+  background-color: var(--pizza-tomato) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z'/%3E%3Cpath d='m21.854 2.147-10.94 10.939'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+}
+
+#send_but i,
+#send_but .fa-solid,
+#send_but .fa-paper-plane {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* mes_stop 圖標替換為停止 SVG (circle-stop) - 與 send_but 同位置切換 */
+#mes_stop:not(.displayNone) {
+  background-color: var(--pizza-tomato) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Crect x='9' y='9' width='6' height='6' rx='1'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+}
+
+#mes_stop i,
+#mes_stop .fa-solid,
+#mes_stop .fa-circle-stop {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* fa-bars (選單) 圖標替換為選單 SVG (menu) */
+.fa-solid.fa-bars.interactable::before {
+  content: "" !important;
+}
+
+.fa-solid.fa-bars.interactable {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' x2='20' y1='12' y2='12'/%3E%3Cline x1='4' x2='20' y1='6' y2='6'/%3E%3Cline x1='4' x2='20' y1='18' y2='18'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+}
+
+/* fa-magic-wand-sparkles 圖標替換為魔術棒 SVG (wand-sparkles) */
+.fa-solid.fa-magic-wand-sparkles.interactable::before {
+  content: "" !important;
+}
+
+.fa-solid.fa-magic-wand-sparkles.interactable {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72'/%3E%3Cpath d='m14 7 3 3'/%3E%3Cpath d='M5 6v4'/%3E%3Cpath d='M19 14v4'/%3E%3Cpath d='M10 2v2'/%3E%3Cpath d='M7 8H3'/%3E%3Cpath d='M21 16h-4'/%3E%3Cpath d='M11 3H9'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+}
+
+/* fa-list-ul 圖標替換為列表 SVG (list) */
+.right_menu_button.fa-solid.fa-list-ul::before,
+.fa-solid.fa-list-ul.interactable::before {
+  content: "" !important;
+}
+
+.right_menu_button.fa-solid.fa-list-ul,
+.fa-solid.fa-list-ul.interactable {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='8' x2='21' y1='6' y2='6'/%3E%3Cline x1='8' x2='21' y1='12' y2='12'/%3E%3Cline x1='8' x2='21' y1='18' y2='18'/%3E%3Cline x1='3' x2='3.01' y1='6' y2='6'/%3E%3Cline x1='3' x2='3.01' y1='12' y2='12'/%3E%3Cline x1='3' x2='3.01' y1='18' y2='18'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 32px 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: inline-block !important;
+}
+
+/* fa-rocket 圖標替換為火箭 SVG (rocket) */
+.fa-solid.fa-rocket::before {
+  content: "" !important;
+}
+
+.fa-solid.fa-rocket {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A3B32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 24px 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   26. hotswap 區域水平滾動
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hotswap,
+.avatars_inline,
+.scroll-reset-container,
+.expander {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  padding: 12px 15px !important; /* 左右增加 padding 確保最後元素可見 */
+  min-height: 90px !important;
+  align-items: center !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(214, 90, 73, 0.4) transparent !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 確保最後一個元素後有足夠空間 */
+.hotswap::after,
+.avatars_inline::after,
+.scroll-reset-container::after,
+.expander::after {
+  content: "" !important;
+  min-width: 15px !important;
+  flex-shrink: 0 !important;
+}
+
+.hotswap > *,
+.avatars_inline > *,
+.scroll-reset-container > *,
+.expander > * {
+  flex-shrink: 0 !important;
+}
+
+/* Webkit 滾動條美化 */
+.hotswap::-webkit-scrollbar,
+.avatars_inline::-webkit-scrollbar,
+.scroll-reset-container::-webkit-scrollbar,
+.expander::-webkit-scrollbar {
+  height: 6px !important;
+  background: transparent !important;
+}
+
+.hotswap::-webkit-scrollbar-thumb,
+.avatars_inline::-webkit-scrollbar-thumb,
+.scroll-reset-container::-webkit-scrollbar-thumb,
+.expander::-webkit-scrollbar-thumb {
+  background-color: rgba(214, 90, 73, 0.4) !important;
+  border-radius: 3px !important;
+}
+
+.hotswap::-webkit-scrollbar-track,
+.avatars_inline::-webkit-scrollbar-track,
+.scroll-reset-container::-webkit-scrollbar-track,
+.expander::-webkit-scrollbar-track {
+  background: rgba(230, 213, 184, 0.3) !important;
+  border-radius: 3px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   27. pre 代碼區塊樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+pre {
+  background-color: var(--pizza-burnt) !important;
+  color: var(--pizza-flour) !important;
+  border-radius: 8px !important;
+  overflow-x: auto !important;
+  border: 1px solid var(--pizza-wheat) !important;
+}
+
+pre code {
+  background-color: transparent !important;
+  color: var(--pizza-flour) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   28. 修正世界書條目
+   ═══════════════════════════════════════════════════════════════════════════ */
+.world_entry input.text_pole {
+  min-width: 80px !important;
+  flex-shrink: 0 !important;
+}
+
+.world_entry .flex-container {
+  flex-wrap: wrap !important;
+}
+
+@media (max-width: 1000px) {
+  .world_popup_entries_list.ui-sortable {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: calc(100vh - 200px) !important;
+    padding-bottom: 100px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   29. chat 區域滾動條
+   ═══════════════════════════════════════════════════════════════════════════ */
+#chat::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+#chat::-webkit-scrollbar-thumb {
+  background-color: rgba(214, 90, 73, 0.4) !important;
+  border-radius: 2px !important;
+}
+
+#chat::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+#chat {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(214, 90, 73, 0.4) transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   30. 滑桿樣式 - 羅勒綠色調
+   ═══════════════════════════════════════════════════════════════════════════ */
+.neo-range-slider {
+  background-color: var(--pizza-wheat) !important;
+}
+
+.neo-range-slider::-webkit-slider-thumb {
+  background-color: var(--pizza-basil) !important;
+}
+
+.neo-range-slider::-moz-range-thumb {
+  background-color: var(--pizza-basil) !important;
+}
+
+input[type="range"] {
+  background-color: var(--pizza-wheat) !important;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: var(--pizza-basil) !important;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--pizza-basil) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   31. Checkbox 開關樣式
+   ═══════════════════════════════════════════════════════════════════════════ */
+input[type="checkbox"]:checked {
+  background-color: var(--pizza-basil) !important;
+  border-color: var(--pizza-basil) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   32. 聊天訊息文字格式樣式 (Markdown Formatting)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 普通文字 */
+.mes_text,
+.mes_text p {
+  color: var(--pizza-burnt) !important;
+  line-height: 1.7 !important;
+}
+
+/* 引用文字 - 雙引號內的對話 */
+.mes_text q,
+.mes_text .q {
+  color: var(--pizza-tomato) !important;
+  font-style: italic !important;
+}
+
+/* 斜體文字 */
+.mes_text em,
+.mes_text i:not(.fa-solid):not([class*="fa-"]) {
+  color: var(--pizza-olive) !important;
+  font-style: italic !important;
+}
+
+/* 粗體文字 */
+.mes_text strong,
+.mes_text b {
+  color: var(--pizza-burnt) !important;
+  font-weight: 700 !important;
+}
+
+/* 斜體加粗文字 */
+.mes_text strong em,
+.mes_text em strong,
+.mes_text b i,
+.mes_text i b {
+  color: var(--pizza-tomato-dark) !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+}
+
+/* 刪除線文字 */
+.mes_text del,
+.mes_text s,
+.mes_text strike {
+  color: var(--pizza-olive) !important;
+  text-decoration: line-through !important;
+  opacity: 0.7 !important;
+}
+
+/* 高亮文字 <mark> */
+.mes_text mark {
+  background-color: #FFF3CD !important;
+  color: var(--pizza-burnt) !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+}
+
+/* 下劃線文字 <u> */
+.mes_text u {
+  text-decoration: underline !important;
+  text-decoration-color: var(--pizza-tomato) !important;
+  text-underline-offset: 3px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   33. 標題樣式 (H1 - H6)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text h1 {
+  color: var(--pizza-tomato) !important;
+  font-size: 1.8em !important;
+  font-weight: 700 !important;
+  border-bottom: 3px solid var(--pizza-tomato) !important;
+  padding-bottom: 8px !important;
+  margin: 16px 0 12px 0 !important;
+  background: transparent !important;
+}
+
+.mes_text h2 {
+  color: var(--pizza-tomato) !important;
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--pizza-wheat) !important;
+  padding-bottom: 6px !important;
+  margin: 14px 0 10px 0 !important;
+  background: transparent !important;
+}
+
+.mes_text h3 {
+  color: var(--pizza-burnt) !important;
+  font-size: 1.3em !important;
+  font-weight: 600 !important;
+  margin: 12px 0 8px 0 !important;
+  background: transparent !important;
+}
+
+.mes_text h4 {
+  color: var(--pizza-burnt) !important;
+  font-size: 1.15em !important;
+  font-weight: 600 !important;
+  margin: 10px 0 6px 0 !important;
+  background: transparent !important;
+}
+
+.mes_text h5 {
+  color: var(--pizza-olive) !important;
+  font-size: 1.05em !important;
+  font-weight: 600 !important;
+  margin: 8px 0 4px 0 !important;
+  background: transparent !important;
+}
+
+.mes_text h6 {
+  color: var(--pizza-olive) !important;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  margin: 6px 0 4px 0 !important;
+  background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   34. 引用區塊 (Blockquote)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text blockquote {
+  background-color: var(--pizza-crust-dark) !important;
+  border-left: 4px solid var(--pizza-tomato) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 12px 16px !important;
+  margin: 10px 0 !important;
+  color: var(--pizza-burnt) !important;
+  font-style: italic !important;
+}
+
+.mes_text blockquote p {
+  margin: 0 !important;
+}
+
+/* 嵌套引用 */
+.mes_text blockquote blockquote {
+  border-left-color: var(--pizza-basil) !important;
+  background-color: var(--pizza-wheat) !important;
+  margin-left: 10px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   35. 內聯代碼 (Inline Code)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text code:not(pre code) {
+  background-color: var(--pizza-crust-dark) !important;
+  color: var(--pizza-tomato) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.9em !important;
+  border: 1px solid var(--pizza-wheat) !important;
+  word-break: break-word !important;
+  white-space: pre-wrap !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   36. 代碼區塊 (Code Block / Pre)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text pre {
+  background-color: var(--pizza-burnt) !important;
+  color: var(--pizza-flour) !important;
+  border-radius: 10px !important;
+  padding: 16px !important;
+  margin: 12px 0 !important;
+  overflow: hidden !important;
+  border: 2px solid var(--pizza-wheat) !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.9em !important;
+  line-height: 1.5 !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.mes_text pre code,
+.mes_text pre code.hljs {
+  background-color: transparent !important;
+  color: var(--pizza-flour) !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: inherit !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow: hidden !important;
+}
+
+/* 代碼區塊語法高亮配色 */
+.mes_text pre .hljs-keyword,
+.mes_text pre .hljs-selector-tag {
+  color: #FF9F7F !important; /* 番茄橙 */
+}
+
+.mes_text pre .hljs-string,
+.mes_text pre .hljs-attr {
+  color: #A8E6A3 !important; /* 羅勒綠 */
+}
+
+.mes_text pre .hljs-number,
+.mes_text pre .hljs-literal {
+  color: #FFD97D !important; /* 起司黃 */
+}
+
+.mes_text pre .hljs-comment {
+  color: #A0917B !important; /* 橄欖褐 */
+  font-style: italic !important;
+}
+
+.mes_text pre .hljs-function,
+.mes_text pre .hljs-title {
+  color: #7FC8F8 !important; /* 淺藍 */
+}
+
+.mes_text pre .hljs-variable,
+.mes_text pre .hljs-template-variable {
+  color: #F8C8DC !important; /* 粉紅 */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   37. 列表樣式 (Lists)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 無序列表 */
+.mes_text ul {
+  list-style-type: disc !important;
+  padding-left: 24px !important;
+  margin: 8px 0 !important;
+}
+
+.mes_text ul li {
+  color: var(--pizza-burnt) !important;
+  margin: 4px 0 !important;
+}
+
+.mes_text ul li::marker {
+  color: var(--pizza-tomato) !important;
+}
+
+/* 有序列表 */
+.mes_text ol {
+  list-style-type: decimal !important;
+  padding-left: 24px !important;
+  margin: 8px 0 !important;
+}
+
+.mes_text ol li {
+  color: var(--pizza-burnt) !important;
+  margin: 4px 0 !important;
+}
+
+.mes_text ol li::marker {
+  color: var(--pizza-tomato) !important;
+  font-weight: 600 !important;
+}
+
+/* 嵌套列表 */
+.mes_text ul ul,
+.mes_text ol ol,
+.mes_text ul ol,
+.mes_text ol ul {
+  margin: 4px 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   38. 水平分隔線 (Horizontal Rule)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text hr {
+  border: none !important;
+  height: 2px !important;
+  background: linear-gradient(to right, transparent, var(--pizza-tomato), transparent) !important;
+  margin: 20px 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   39. 表格樣式 (Tables)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin: 12px 0 !important;
+  border: 1px solid var(--pizza-wheat) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.mes_text th {
+  background-color: var(--pizza-tomato) !important;
+  color: #FFFFFF !important;
+  padding: 10px 12px !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+}
+
+.mes_text td {
+  background-color: var(--pizza-mozzarella) !important;
+  color: var(--pizza-burnt) !important;
+  padding: 8px 12px !important;
+  border-top: 1px solid var(--pizza-wheat) !important;
+}
+
+.mes_text tr:nth-child(even) td {
+  background-color: var(--pizza-crust-dark) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   40. 連結樣式 (Links in messages)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text a {
+  color: var(--pizza-tomato) !important;
+  text-decoration: underline !important;
+  text-decoration-style: dotted !important;
+  text-underline-offset: 2px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   41. 圖片樣式 (Images in messages)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mes_text img {
+  max-width: 100% !important;
+  border-radius: 10px !important;
+  border: 2px solid var(--pizza-wheat) !important;
+  margin: 8px 0 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🍕 瑪格麗特披薩主題 - 完成！
+   Buon appetito! 祝您用餐愉快！
+   ═══════════════════════════════════════════════════════════════════════════ */
