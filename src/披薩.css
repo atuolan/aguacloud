@@ -3,7 +3,7 @@
    靈感來源：經典義大利瑪格麗特披薩的溫暖配色
    - 餅皮米黃、番茄紅、莫札瑞拉白、羅勒綠
    特點：完全靜態、無動畫、無懸停效果
-   作者：阿瓜雲在哪都好反正二改可以標個阿瓜雲
+      作者：阿瓜雲在哪都好反正二改可以標個阿瓜雲
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -11,20 +11,20 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
   /* 主要配色 - 瑪格麗特披薩色系 */
-  --pizza-crust: #ffeadd;           /* 烤餅皮 - 背景基底 */
-  --pizza-crust-dark: #EADBC8;      /* 深餅皮 - 用戶氣泡 */
-  --pizza-mozzarella: #FFFEF6;      /* 莫札瑞拉起司 - 面板/AI氣泡 */
-  --pizza-tomato: #D65A49;          /* 番茄醬 - 強調色/按鈕 */
-  --pizza-tomato-dark: #C04A3A;     /* 深番茄 - 按鈕按下 */
-  --pizza-basil: #5D9C59;           /* 羅勒葉 - 成功/選中狀態 */
-  --pizza-basil-light: #7DB87A;     /* 淺羅勒 - 聚焦邊框 */
-  --pizza-burnt: #4A3B32;           /* 焦脆邊緣 - 主要文字 */
-  --pizza-wheat: #E6D5B8;           /* 小麥色 - 邊框/分隔線 */
-  --pizza-olive: #8B7355;           /* 橄欖油色 - 次要文字 */
-  --pizza-flour: #FDF8F0;           /* 麵粉白 - 輸入框背景 */
-  
+  --pizza-crust: #ffeadd; /* 烤餅皮 - 背景基底 */
+  --pizza-crust-dark: #eadbc8; /* 深餅皮 - 用戶氣泡 */
+  --pizza-mozzarella: #fffef6; /* 莫札瑞拉起司 - 面板/AI氣泡 */
+  --pizza-tomato: #d65a49; /* 番茄醬 - 強調色/按鈕 */
+  --pizza-tomato-dark: #c04a3a; /* 深番茄 - 按鈕按下 */
+  --pizza-basil: #5d9c59; /* 羅勒葉 - 成功/選中狀態 */
+  --pizza-basil-light: #7db87a; /* 淺羅勒 - 聚焦邊框 */
+  --pizza-burnt: #4a3b32; /* 焦脆邊緣 - 主要文字 */
+  --pizza-wheat: #e6d5b8; /* 小麥色 - 邊框/分隔線 */
+  --pizza-olive: #8b7355; /* 橄欖油色 - 次要文字 */
+  --pizza-flour: #fdf8f0; /* 麵粉白 - 輸入框背景 */
+
   /* 漸層標題背景 */
-  --header-gradient: linear-gradient(to right, #D65A49, transparent);
+  --header-gradient: linear-gradient(to right, #d65a49, transparent);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -73,7 +73,7 @@ body,
    5. 聊天區域
    ═══════════════════════════════════════════════════════════════════════════ */
 #chat {
-  background: linear-gradient(to bottom, #F8F1E5, #fbd4b8) !important;
+  background: linear-gradient(to bottom, #f8f1e5, #fbd4b8) !important;
   background-attachment: local !important;
 }
 
@@ -156,12 +156,12 @@ body,
 .mes.selected {
   background: linear-gradient(
     135deg,
-    rgba(217, 99, 83, 0.15) 0%,    /* 番茄紅淡色 */
-    rgba(93, 156, 89, 0.12) 50%,   /* 羅勒綠淡色 */
-    rgba(217, 99, 83, 0.15) 100%
+    rgba(217, 99, 83, 0.15) 0%,
+    /* 番茄紅淡色 */ rgba(93, 156, 89, 0.12) 50%,
+    /* 羅勒綠淡色 */ rgba(217, 99, 83, 0.15) 100%
   ) !important;
   border: 2px solid #d96353 !important; /* 番茄紅邊框 */
-  box-shadow: 
+  box-shadow:
     0 0 15px rgba(217, 99, 83, 0.3),
     inset 0 0 20px rgba(217, 99, 83, 0.05) !important;
 }
@@ -274,14 +274,14 @@ body,
    ═══════════════════════════════════════════════════════════════════════════ */
 .menu_button {
   background-color: var(--pizza-tomato) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   border-radius: 8px !important;
   border: none !important;
 }
 
 .menu_button i,
 .menu_button .fa-solid {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* 取消懸停效果 - 完全靜態 */
@@ -289,7 +289,7 @@ body,
 .menu_button:focus,
 .menu_button:active {
   background-color: var(--pizza-tomato) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   filter: none !important;
   opacity: 1 !important;
   transform: none !important;
@@ -297,7 +297,7 @@ body,
 
 .menu_button:hover i,
 .menu_button:hover .fa-solid {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* 所有 interactable 取消懸停動畫 */
@@ -497,7 +497,7 @@ h4:not(:has(span))::after {
 .popup .menu_button,
 #dialogue_popup .menu_button {
   background-color: var(--pizza-tomato) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   border: none !important;
 }
 
@@ -507,7 +507,7 @@ h4:not(:has(span))::after {
 .popup .menu_button i,
 .popup .menu_button .fa-solid,
 .popup .menu_button span {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* 彈窗內文字顏色 */
@@ -554,7 +554,7 @@ h4:not(:has(span))::after {
 /* 彈窗按鈕文字強制顯示 */
 #select_chat_popup .menu_button *,
 .popup .menu_button * {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -566,7 +566,7 @@ h4:not(:has(span))::after {
 #chat_import_button,
 #chat_import_button span,
 #chat_import_button i {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* 強制顯示按鈕文字 */
@@ -577,7 +577,7 @@ h4:not(:has(span))::after {
   display: inline !important;
   font-size: 14px !important;
   margin-left: 5px !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   background-color: transparent !important;
   width: auto !important;
   height: auto !important;
@@ -592,7 +592,7 @@ h4:not(:has(span))::after {
    ═══════════════════════════════════════════════════════════════════════════ */
 .select2-selection__rendered {
   background: var(--header-gradient) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   padding: 5px 10px !important;
   border-radius: 5px !important;
 }
@@ -616,11 +616,13 @@ h4:not(:has(span))::after {
 .select2-results__option:hover,
 .select2-results__option--selected {
   background-color: var(--pizza-tomato) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* 確保所有下拉選單文字清晰可見 */
-.select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
   color: var(--pizza-burnt) !important;
 }
 
@@ -635,13 +637,13 @@ h4:not(:has(span))::after {
    ═══════════════════════════════════════════════════════════════════════════ */
 .bg-header-fixed {
   background: var(--header-gradient) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   padding: 5px 10px !important;
   border-radius: 5px !important;
 }
 
 .bg-header-fixed * {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -907,7 +909,7 @@ a:active {
 .mes_reasoning_header,
 .mes_reasoning_header.flex-container {
   background: var(--header-gradient) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   padding: 5px 10px !important;
   border-radius: 5px !important;
   display: flex !important;
@@ -918,7 +920,7 @@ a:active {
 
 .mes_reasoning_header *,
 .mes_reasoning_header.flex-container * {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .mes_reasoning_header .fa-chevron-down,
@@ -935,15 +937,19 @@ a:active {
   .mes {
     max-width: 95% !important;
   }
-  
+
   /* 修復 lm_button_panel_pin_div 與 scrollableInner 重疊問題 */
   /* 讓 scrollableInner 下移，避免被頂部固定元素遮擋 */
   .drawer-content.fillLeft .scrollableInner {
     margin-top: 10px !important;
   }
-  
+
   /* 如果頂部有多個固定元素，增加更多間距 */
-  #lm_button_panel_pin_div + .toggle-description + #labModeWarning + a + .scrollableInner,
+  #lm_button_panel_pin_div
+    + .toggle-description
+    + #labModeWarning
+    + a
+    + .scrollableInner,
   #lm_button_panel_pin_div ~ .scrollableInner {
     padding-top: 15px !important;
   }
@@ -998,6 +1004,18 @@ a:active {
 .options-content a i,
 #options a .fa-solid,
 .options-content a .fa-solid {
+  color: var(--pizza-burnt) !important;
+}
+
+/* extensionsMenu 內的 options-content 字體顏色 */
+#extensionsMenu .options-content,
+#extensionsMenu .options-content * {
+  color: var(--pizza-burnt) !important;
+}
+
+/* list-group-item 相關樣式 */
+.list-group-item.flex-container.flexGap5.interactable,
+.list-group-item.flex-container.flexGap5.interactable * {
   color: var(--pizza-burnt) !important;
 }
 
@@ -1460,7 +1478,7 @@ input[type="checkbox"]:checked {
 
 /* 高亮文字 <mark> */
 .mes_text mark {
-  background-color: #FFF3CD !important;
+  background-color: #fff3cd !important;
   color: var(--pizza-burnt) !important;
   padding: 1px 4px !important;
   border-radius: 3px !important;
@@ -1563,7 +1581,7 @@ input[type="checkbox"]:checked {
   color: var(--pizza-tomato) !important;
   padding: 2px 6px !important;
   border-radius: 4px !important;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-family: "Consolas", "Monaco", "Courier New", monospace !important;
   font-size: 0.9em !important;
   border: 1px solid var(--pizza-wheat) !important;
   word-break: break-word !important;
@@ -1582,7 +1600,7 @@ input[type="checkbox"]:checked {
   margin: 12px 0 !important;
   overflow: hidden !important;
   border: 2px solid var(--pizza-wheat) !important;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-family: "Consolas", "Monaco", "Courier New", monospace !important;
   font-size: 0.9em !important;
   line-height: 1.5 !important;
   white-space: pre-wrap !important;
@@ -1606,32 +1624,32 @@ input[type="checkbox"]:checked {
 /* 代碼區塊語法高亮配色 */
 .mes_text pre .hljs-keyword,
 .mes_text pre .hljs-selector-tag {
-  color: #FF9F7F !important; /* 番茄橙 */
+  color: #ff9f7f !important; /* 番茄橙 */
 }
 
 .mes_text pre .hljs-string,
 .mes_text pre .hljs-attr {
-  color: #A8E6A3 !important; /* 羅勒綠 */
+  color: #a8e6a3 !important; /* 羅勒綠 */
 }
 
 .mes_text pre .hljs-number,
 .mes_text pre .hljs-literal {
-  color: #FFD97D !important; /* 起司黃 */
+  color: #ffd97d !important; /* 起司黃 */
 }
 
 .mes_text pre .hljs-comment {
-  color: #A0917B !important; /* 橄欖褐 */
+  color: #a0917b !important; /* 橄欖褐 */
   font-style: italic !important;
 }
 
 .mes_text pre .hljs-function,
 .mes_text pre .hljs-title {
-  color: #7FC8F8 !important; /* 淺藍 */
+  color: #7fc8f8 !important; /* 淺藍 */
 }
 
 .mes_text pre .hljs-variable,
 .mes_text pre .hljs-template-variable {
-  color: #F8C8DC !important; /* 粉紅 */
+  color: #f8c8dc !important; /* 粉紅 */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1686,7 +1704,12 @@ input[type="checkbox"]:checked {
 .mes_text hr {
   border: none !important;
   height: 2px !important;
-  background: linear-gradient(to right, transparent, var(--pizza-tomato), transparent) !important;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--pizza-tomato),
+    transparent
+  ) !important;
   margin: 20px 0 !important;
 }
 
@@ -1705,7 +1728,7 @@ input[type="checkbox"]:checked {
 
 .mes_text th {
   background-color: var(--pizza-tomato) !important;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   padding: 10px 12px !important;
   text-align: left !important;
   font-weight: 600 !important;
@@ -1743,7 +1766,6 @@ input[type="checkbox"]:checked {
   border: 2px solid var(--pizza-wheat) !important;
   margin: 8px 0 !important;
 }
-
 
 /* ═══════════════════════════════════════════════════════════════════════════
    🍕 瑪格麗特披薩主題 - 完成！
