@@ -3,7 +3,6 @@
    靈感來源：經典義大利瑪格麗特披薩的溫暖配色
    - 餅皮米黃、番茄紅、莫札瑞拉白、羅勒綠
    特點：完全靜態、無動畫、無懸停效果
-      作者：阿瓜雲在哪都好反正二改可以標個阿瓜雲
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1771,3 +1770,125 @@ input[type="checkbox"]:checked {
    🍕 瑪格麗特披薩主題 - 完成！
    Buon appetito! 祝您用餐愉快！
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   26. 角色管理面板自適應修復 (PersonaManagement)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 角色管理抽屜容器 - 自適應寬度 */
+.PersonaManagement.drawer-content.openDrawer {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* 角色管理內部容器 */
+.PersonaManagement .scrollableInner {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  padding: 10px !important;
+}
+
+/* 角色卡片容器 */
+.PersonaManagement .persona_list,
+.PersonaManagement .personas_list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* 單個角色卡片 */
+.PersonaManagement .persona,
+.PersonaManagement .persona-item {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* 角色卡片內的 flex 容器 */
+.PersonaManagement .flex-container {
+  flex-wrap: wrap !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 角色頭像區域 */
+.PersonaManagement .avatar_container,
+.PersonaManagement .avatar {
+  flex-shrink: 0 !important;
+  max-width: 80px !important;
+}
+
+/* 角色信息區域 */
+.PersonaManagement .persona_info,
+.PersonaManagement .persona-details {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  word-wrap: break-word !important;
+}
+
+/* 角色名稱和描述 */
+.PersonaManagement .persona_name,
+.PersonaManagement .persona_description {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  word-wrap: break-word !important;
+}
+
+/* 按鈕組 */
+.PersonaManagement .persona_buttons,
+.PersonaManagement .button-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* 移動端特別優化 */
+@media (max-width: 1000px) {
+  .PersonaManagement.drawer-content.openDrawer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  .PersonaManagement .scrollableInner {
+    padding: 8px !important;
+  }
+
+  .PersonaManagement .persona,
+  .PersonaManagement .persona-item {
+    padding: 10px !important;
+  }
+
+  .PersonaManagement .avatar_container,
+  .PersonaManagement .avatar {
+    max-width: 60px !important;
+  }
+}
+
+/* 小屏幕設備 */
+@media (max-width: 600px) {
+  .PersonaManagement .flex-container {
+    flex-direction: column !important;
+  }
+
+  .PersonaManagement .avatar_container {
+    margin: 0 auto !important;
+  }
+
+  .PersonaManagement .persona_buttons {
+    justify-content: center !important;
+  }
+}
