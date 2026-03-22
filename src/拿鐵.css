@@ -577,7 +577,7 @@ a:active {
 .mes {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: stretch !important;
 }
 
 .mes .mesAvatarWrapper {
@@ -607,6 +607,12 @@ a:active {
 .mes .mes_block {
   order: 3 !important;
   width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 覆蓋原本為 swipe 箭頭預留的不對稱 padding */
+.mes .mes_text {
+  padding: 5px 5px 5px 5px !important;
 }
 
 .mes .swipeRightBlock {
@@ -915,51 +921,32 @@ pre code {
   scrollbar-color: rgba(141, 110, 99, 0.4) transparent !important;
 }
 
-/* 舊版酒館打勾框（input[type="checkbox"]）適配 */
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  min-width: 18px;
-  border: 2px solid #8d6e63 !important;
-  border-radius: 3px;
-  background-color: #e8dbc7 !important;
-  cursor: pointer;
-  position: relative;
-  vertical-align: middle;
-  margin: 0 4px;
-  box-shadow: none !important;
+/* 修正 swipe 箭頭與內容重疊問題 */
+/* 讓 swipe_left 和 swipeRightBlock 顯示在泡泡底部，不佔 flex 空間 */
+.mes {
+  position: relative !important;
+  padding-bottom: 32px !important; /* 為底部箭頭留空間 */
 }
 
-input[type="checkbox"]::before {
-  content: "";
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-color: #3d2314 !important;
-  transition: transform 0.15s ease;
-  box-shadow: none !important;
+.mes .swipe_left {
+  position: absolute !important;
+  bottom: 6px !important;
+  left: 16px !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 10 !important;
+  order: unset !important;
 }
 
-input[type="checkbox"]:checked::before {
-  transform: translate(-50%, -50%) scale(1) !important;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #c9b8a8 !important;
-  border-color: #3d2314 !important;
-}
-
-/* checkbox_label 標籤對齊 */
-.checkbox_label {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
+.mes .swipeRightBlock {
+  position: absolute !important;
+  bottom: 6px !important;
+  right: 16px !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 10 !important;
+  order: unset !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
