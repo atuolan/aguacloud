@@ -1,6 +1,6 @@
 /*
  * 作者:阿瓜雲在上
- * 阿華田口味的酒館主題 - 夜間版本
+ * 拿鐵口味的酒館主題 - 夜間版本
  */
 
 /* 主體背景顏色 */
@@ -581,7 +581,9 @@ a:active {
 .mes {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: stretch !important;
+  position: relative !important;
+  padding-bottom: 32px !important;
 }
 
 .mes .mesAvatarWrapper {
@@ -622,10 +624,34 @@ a:active {
 .mes .mes_block {
   order: 3 !important;
   width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 覆蓋原本為 swipe 箭頭預留的不對稱 padding */
+.mes .mes_text {
+  padding: 5px 5px 5px 5px !important;
 }
 
 .mes .swipeRightBlock {
   order: 4 !important;
+  position: absolute !important;
+  bottom: 6px !important;
+  right: 16px !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 10 !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.mes .swipe_left {
+  position: absolute !important;
+  bottom: 6px !important;
+  left: 16px !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 10 !important;
 }
 
 /* mesIDDisplay 改成「第X杯」 */
